@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Cashew's Library</title>
+</head>
+<body>
+    <nav>
+        <ul class='title-container'>
+            <li class="library-title">Cashew Library</li>
+        </ul>
+        <ul class='new-book-btn-container'>
+            <li>
+                <button class='new-book-btn'>+</button>
+            </li>
+        </ul>
+
+    </nav>
+    <main class='container'>
+        <div class="library-container">
+            
+        </div>
+    </main>
+    <div class='side-panel'>
+        <div class="book-form">
+            <div class='book-input-container'>
+                <input type='text' name='book-title' placeholder="Title" class="book-input" id='book-title'>
+            </div>
+
+            <div class='book-input-container'>
+                <input type='text' name='book-author' placeholder="Author" class="book-input" id='book-author'>
+            </div>
+
+            <div class='book-input-container'>
+                <input type='number' name='book-pages' placeholder="Pages" class="book-input" id='book-pages'>
+            </div>
+
+            <div class='book-input-container'>
+                <input type='checkbox' name='read-yet' class="book-input" id='book-read'>
+            </div>
+
+            <div class='book-input-container'>
+                <button name='update' class='update-btn'>Update</button>
+                <button name='submit' class='submit-book'>Create</button>
+            </div>
+            <div class='book-input-container' id="nuke-btn-container">
+                <button name='nuke-library' class='nuke-library-btn'>Nuke Library</button>
+            </div>
+
+        </div>
+    </div>
+    <div id="content"></div>
+    <script src="main.js"></script>
+    
+</body>
+</html>

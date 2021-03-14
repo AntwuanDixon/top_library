@@ -1,0 +1,294 @@
+@import url('https://fonts.googleapis.com/css2?family=Fascinate&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fascinate&family=Libre+Barcode+39+Text&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+
+* {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 1em;
+}
+
+body {
+    width: 100vw;
+    padding: 0;
+    margin: 0;
+}
+
+nav {
+    height: 126px;
+    width: 100%;
+    z-index: 200;
+    background-color: rgb(0, 0, 0);
+    border-style: solid;
+    border-width: 2px;
+    border-bottom-color: azure;
+}
+
+li {
+    list-style: none;
+}
+
+main {
+    background-color: rgb(41, 41, 41);
+    height: 88vh;
+    overflow-x: hidden;
+}
+
+p {
+    font-size: 1.1em;
+}
+
+input {
+    height: 30px;
+    width: 80%;
+    font-size: 1.1em;
+    margin-top: 10px;
+}
+
+label {
+    font-size: 1.1em;
+    vertical-align: middle;
+}
+
+button {
+    background-color: rgb(61, 61, 61);
+    color: white;
+    width: 100px;
+    height: 40px;
+    border-radius: 5px;
+}
+
+.title {
+    font-size: 1.4em;
+    padding: 0px 10px 0px 10px;
+    color: white;
+    margin-top: 50px;
+}
+
+.author {
+    font-size: 1.1em;
+    color: white;
+    position: absolute;
+    width: 100%;
+    bottom: 40px;
+}
+
+.title-container {
+    color: white;
+    float: left;
+    padding-left: 65px;
+    padding-top: 15px;
+}
+
+.library-title {
+    font-size: 4em;
+    font-family: 'Libre Barcode 39 Text', cursive;
+}
+
+.library-container {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    text-align: center;
+    background-color: black;
+    overflow: scroll;
+    width: 100vw;
+    min-height: 100%;
+}
+
+.library-container.shrink {
+    transition: 2.2s;
+    width: calc(100% - 300px);
+}
+
+.library-container.grow {
+    transition: 1.5s;
+    width: 100%;
+}
+
+.side-panel {
+    position: fixed;
+    right: 0px;
+    top: 122px;
+    width: 0px;
+    height: 88vh;
+    border-style: none;
+    background-color: black;
+}
+
+.side-panel.out {
+    transition: 1.5s;
+    width: 300px;
+}
+
+.side-panel.in {
+    transition: 1.5s;
+    width: 0px;
+}
+
+.book-container {
+    position: relative;
+    /*
+    flex: 1 0 15%;
+    */
+    float: left;
+    margin: 20px 30px;
+    padding: 10px 5px 10px 5px;
+    min-width: 260px;
+    height: 360px;
+    background-color: rgb(0, 0, 0);
+}
+
+.book-container.shrink {
+    transition: 1.5s;
+    margin: 20px 10px;
+    min-width: 240px;
+    max-width: 240px;
+    height: 330px;
+}
+
+.book-container.grow {
+    transition: 1.5s;
+    margin: 20px 30px;
+    min-width: 260px;
+    max-width: 260px;
+    height: 360px;
+}
+
+.book-container.new {
+    margin: 20px 0px;
+    min-width: 220px;
+    height: 330px;
+}
+
+.book-attribute {
+    display: inline-block;
+    width: 100%;
+}
+
+.book-form {
+    opacity: 0;
+    text-align: center;
+    position: fixed;
+    right: 0px;
+    top: 121px;
+    width: 0px;
+    height: 100%;
+    padding-top: 30px;
+    border-style: none;
+    border-width: 0px;
+}
+
+.book-form.out {
+    transition: 1.5s;
+    width: 297px;
+    opacity: 1;
+    border-style: solid;
+    border-width: 2px;
+    border-left-color: azure;
+}
+
+.book-form.in {
+    transition: 1.5s;
+    width: 0px;
+    opacity: 0;
+    border-style: none;
+}
+
+#book-pages {
+    width: 100px;
+}
+
+#book-read {
+    width: 30px;
+    margin-left: 0px;
+}
+
+.ID {
+    color: white;
+}
+
+.book-attribute-container {
+    text-align: center;
+    position: absolute;
+    bottom: 0;
+    right: 10px;
+    margin: 50px 0px 0px 0px;
+    display: inline-block;
+    width: 85%;
+    height: 90%;
+    border-style: solid;
+    border-width: .2em;
+    border-radius: 15px;
+    border-color: azure;
+}
+
+.book-attribute-container.no-border {
+    border-style: none;
+}
+
+.book-input-container {
+    text-align: left;
+    margin: 20px 20px 0px 50px;
+    display: inline-block;
+    width: 80%;
+}
+
+.new-book-btn-container {
+    float: right;
+}
+
+.new-book-btn {
+    margin: 0px 60px 0px 0px;
+    padding: 0px;
+    height: 80px;
+    width: 80px;
+    background-color: rgb(0, 0, 0);
+    font-size: 3em;
+    color: rgb(255, 255, 255);
+    border-radius: 10px;
+    border-color: azure;
+    border-width: 2px;
+    border-style: solid;
+}
+
+.book-cover-container {
+    display: inline-block;
+    position: absolute;
+    bottom: -5px;
+    right: -15px;
+    width: 113%;
+    margin-top: 0px;
+    z-index: 100;
+}
+
+.book-cover {
+    max-width: 90%;
+    border-radius: 5px;
+    -webkit-box-reflect: below 0px -webkit-gradient(linear, left top, left bottom, from(transparent), color-stop(80%, transparent) , to(rgba(255, 255, 255, 0.26)));
+}
+
+
+.delete-btn {
+    border-radius: 20px;
+    border-style: solid;
+    border-width: 2px;
+    border-color: azure;
+    background-color: black;
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    bottom: -10px;
+    right: 0px;
+    z-index: 200;
+    padding-bottom: 5px;
+}
+
+.nuke-library-btn {
+    width: 200px;
+}
+
+#nuke-btn-container {
+    position: absolute;
+    bottom: 200px;
+    left: 0px;
+}
