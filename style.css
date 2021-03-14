@@ -8,14 +8,24 @@
 }
 
 body {
-    width: 100vw;
     padding: 0;
     margin: 0;
+    background-color: black;
 }
 
+@media (max-width: 850px) {
+    html {
+        font-size: .8em;
+    }
+    .title-container {
+        max-width: min-content;
+        padding: 0px;
+    }
+}
+
+
 nav {
-    height: 126px;
-    width: 100%;
+    height: 120px;
     z-index: 200;
     background-color: rgb(0, 0, 0);
     border-style: solid;
@@ -29,7 +39,8 @@ li {
 
 main {
     background-color: rgb(41, 41, 41);
-    height: 88vh;
+    max-height: 87vh;
+    width: 100%;
     overflow-x: hidden;
 }
 
@@ -108,28 +119,32 @@ button {
 .side-panel {
     position: fixed;
     right: 0px;
-    top: 122px;
+    bottom: 0px;
     width: 0px;
-    height: 88vh;
+    height: 84.3vh;
     border-style: none;
     background-color: black;
+    padding-top: 30px;
+    border-style: none;
+    border-width: 0px;
 }
 
 .side-panel.out {
     transition: 1.5s;
     width: 300px;
+    border-style: solid;
+    border-width: 2px;
+    border-left-color: azure;
 }
 
 .side-panel.in {
     transition: 1.5s;
     width: 0px;
+    border-style: none;
 }
 
 .book-container {
     position: relative;
-    /*
-    flex: 1 0 15%;
-    */
     float: left;
     margin: 20px 30px;
     padding: 10px 5px 10px 5px;
@@ -170,21 +185,15 @@ button {
     text-align: center;
     position: fixed;
     right: 0px;
-    top: 121px;
+    bottom: 0px;
     width: 0px;
-    height: 100%;
-    padding-top: 30px;
-    border-style: none;
-    border-width: 0px;
+    height: 83vh;
 }
 
 .book-form.out {
     transition: 1.5s;
     width: 297px;
     opacity: 1;
-    border-style: solid;
-    border-width: 2px;
-    border-left-color: azure;
 }
 
 .book-form.in {
@@ -203,10 +212,6 @@ button {
     margin-left: 0px;
 }
 
-.ID {
-    color: white;
-}
-
 .book-attribute-container {
     text-align: center;
     position: absolute;
@@ -220,10 +225,6 @@ button {
     border-width: .2em;
     border-radius: 15px;
     border-color: azure;
-}
-
-.book-attribute-container.no-border {
-    border-style: none;
 }
 
 .book-input-container {
@@ -249,22 +250,6 @@ button {
     border-color: azure;
     border-width: 2px;
     border-style: solid;
-}
-
-.book-cover-container {
-    display: inline-block;
-    position: absolute;
-    bottom: -5px;
-    right: -15px;
-    width: 113%;
-    margin-top: 0px;
-    z-index: 100;
-}
-
-.book-cover {
-    max-width: 90%;
-    border-radius: 5px;
-    -webkit-box-reflect: below 0px -webkit-gradient(linear, left top, left bottom, from(transparent), color-stop(80%, transparent) , to(rgba(255, 255, 255, 0.26)));
 }
 
 
