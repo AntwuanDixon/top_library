@@ -1,5 +1,3 @@
-// const { throwStatement } = require('babel-types');
-
 const libraryContainer = document.querySelector('.library-container');
 const bookAuthorInput = document.querySelector('#book-author');
 const bookTitleInput = document.querySelector('#book-title');
@@ -13,26 +11,8 @@ const bookForm = document.querySelector('.book-form');
 const sideBar = document.querySelector('.side-panel');
 var id;
 var libraryArr = fetchLocalLib();
-/*
-if (localStorage.getItem('libraryArr' !== null)) {
-    var libraryArr = fetchLocalLib();
-    console.log(libraryArr)
-    if (libraryArr == null) {
-        var libraryArr = [];
-        var exampleBook = new Book('The Art of War', 'Sun Tsu', 68, true)
-        libraryArr.push(exampleBook)
-        localStorage.setItem('libraryArr', JSON.stringify(libraryArr))
-    }
-} else {
-    console.log('chill')
-    var libraryArr = fetchLocalLib();
-    var libraryArr = [];
-    var exampleBook = new Book('The Art of War', 'Sun Tsu', 68, true)
-    libraryArr.push(exampleBook)
-    localStorage.setItem('libraryArr', JSON.stringify(libraryArr))
-    console.log(libraryArr)
-}
-*/
+
+
 const makeNewBookContainer = function (book, index) {
     var kicked = false;
     var bookContainer = document.createElement("div");
@@ -82,8 +62,6 @@ const makeNewBookContainer = function (book, index) {
             id = event.target.parentNode.dataset.id;
         } else if (event.target.parentNode.parentNode.dataset.id !== undefined) {
             id = event.target.parentNode.parentNode.dataset.id;
-        } else if (event.target.parentNode.parentNode.parentNode.dataset.id !== undefined) {
-            id = event.target.parentNode.parentNode.parentNode.dataset.id;
         } else {
             console.log('could not access container')
         }
@@ -96,7 +74,6 @@ const makeNewBookContainer = function (book, index) {
         bookReadInput.checked = libraryArr[id].read;
     
         localStorage.setItem('libraryArr', JSON.stringify(libraryArr))
-        
     })
 };
 
@@ -117,7 +94,6 @@ updateBtn.addEventListener('click', function () {
     var selectedBookObj = libraryArr[selectedBookObjID]
 
     while (selectedBookCont.childNodes[0].firstChild) {
-        console.log(selectedBookCont.childNodes[0])
         selectedBookCont.childNodes[0].removeChild(selectedBookCont.childNodes[0].lastChild)
     }
 
@@ -135,10 +111,9 @@ updateBtn.addEventListener('click', function () {
 
     libraryArr[selectedBookObjID] = selectedBookObj;
     localStorage.setItem('libraryArr', JSON.stringify(libraryArr))
-    if (selectedBookCont.childNodes[0].childNodes[0].nodeName === "p") {
-        selectedBookCont.childNodes[0].childNodes[0].innerHTML = selectedBookObj.title;
-        selectedBookCont.childNodes[0].childNodes[1].innerHTML = selectedBookObj.author;
-    }
+
+    selectedBookCont.childNodes[0].childNodes[0].innerHTML = selectedBookObj.title;
+    selectedBookCont.childNodes[0].childNodes[1].innerHTML = selectedBookObj.author;
 
     foldSideBar();
     kicked = true;
@@ -175,7 +150,6 @@ submitBtn.addEventListener('click', function () {
     let i = libraryArr.length;
     libraryArr.push(newBook);
     localStorage.setItem('libraryArr', JSON.stringify(libraryArr))
-    console.log(libraryArr)
     makeNewBookContainer(newBook, i);
 
     foldSideBar();
@@ -186,8 +160,20 @@ submitBtn.addEventListener('click', function () {
     })
 });
 
-for (let i = 0; i < libraryArr.length; i++) {
-    makeNewBookContainer(libraryArr[i], i)
+if (libraryArr !== null) {
+    loadLibFromStorage (libraryArr)
+} else {
+    libraryArr = [];
+    var exampleBook = new Book('The Art of War', 'Sun Tsu', 68, true)
+    libraryArr.push(exampleBook)
+    localStorage.setItem('libraryArr', JSON.stringify(libraryArr))
+    loadLibFromStorage (libraryArr)
+}
+
+function loadLibFromStorage (libraryArr) {
+    for (let i = 0; i < libraryArr.length; i++) {
+        makeNewBookContainer(libraryArr[i], i)
+    }
 }
 
 function Book(title, author, pages, read, state) {
