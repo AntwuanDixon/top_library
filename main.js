@@ -12,19 +12,89 @@ const sideBar = document.querySelector('.side-panel');
 var id;
 var libraryArr = fetchLocalLib();
 
+var DOMModule = (function () {
+    return {
+        addBookAttCont: function () {
+            var newBookDiv = document.createElement('div');
+            newBookDiv.className = "book-attribute-container";
+            return newBookDiv;
+        },
+        
+        addBookTitleCont: function (book) {
+            var bookTitle = document.createElement('p');
+            bookTitle.className = 'title';
+            bookTitle.innerHTML = book.title;
+            return bookTitle;
+        },
+        
+        addBookAuthorCont: function (book) {
+            var bookAuthor = document.createElement('p');
+            bookAuthor.className = 'author';
+            bookAuthor.innerHTML = book.author;
+            return bookAuthor;
+        },
+        
+        addDeleteBtn: function () {
+            var deleteBtn = document.createElement('button');
+            deleteBtn.className = "delete-btn";
+            deleteBtn.innerHTML = "x";
+            return deleteBtn;
+        },
+        
+        expandSideBar: function() {
+            const bookCards = document.querySelectorAll('.book-container');
+            libraryContainer.classList.add('shrink');
+            libraryContainer.classList.remove('grow');
+            
+            bookCards.forEach((card) => {
+                card.classList.add('shrink')
+                card.classList.remove('grow');
+            })
+            sideBar.classList.add('out');
+            sideBar.classList.remove('in');
+        
+        },
+        
+        clearInputFields: function () {
+            bookTitleInput.value = ''
+            bookAuthorInput.value = ''
+            bookPagesInput.value = ''
+            bookReadInput.checked = ''
+        },
+        
+        refactorLibrary: function () {
+            libraryArr = fetchLocalLib();
+            const allBookContainers = document.querySelectorAll('.book-container')
+            allBookContainers.forEach(function (book, index) {
+                book.dataset.id = (libraryArr.length - 1) - index;
+            })
+        },
+        
+        foldSideBar: function() {
+            const bookCards = document.querySelectorAll('.book-container');
+            libraryContainer.classList.remove('shrink');
+            libraryContainer.classList.add('grow');
+            bookCards.forEach((card) => {
+                card.classList.remove('shrink');
+                card.classList.add('grow');
+                })
+            bookForm.classList.add('in');
+            sideBar.classList.add('in');
+        }
+    };
+})();
 
 const makeNewBookContainer = function (book, index) {
-    var kicked = false;
     var bookContainer = document.createElement("div");
     bookContainer.className = "book-container";
     bookContainer.dataset.id = index;
 
     libraryContainer.prepend(bookContainer);
     
-    var newBookDiv = addBookAttCont();
-    var bookTitle = addBookTitleCont(book);
-    var bookAuthor = addBookAuthorCont(book);
-    var deleteBtn = addDeleteBtn();
+    var newBookDiv = DOMModule.addBookAttCont();
+    var bookTitle = DOMModule.addBookTitleCont(book);
+    var bookAuthor = DOMModule.addBookAuthorCont(book);
+    var deleteBtn = DOMModule.addDeleteBtn();
     
     bookContainer.appendChild(newBookDiv);
     newBookDiv.appendChild(bookTitle);
@@ -37,18 +107,17 @@ const makeNewBookContainer = function (book, index) {
         bookContainer.remove();
         libraryArr.splice(bookID, 1);
         localStorage.setItem('libraryArr', JSON.stringify(libraryArr))
-        refactorLibrary();
-    }, {once: true})
+        DOMModule.refactorLibrary();
+    })
 
     newBookDiv.addEventListener('click', function (event) {
-        //libraryArr = fetchLocalLib();
-        refactorLibrary();
+        DOMModule.refactorLibrary();
         
-        libraryArr.forEach(function (thisBook) {
-            thisBook.selected = false;
+        libraryArr.forEach(function (storedBook) {
+            storedBook.selected = false;
         })
 
-        expandSideBar();
+        DOMModule.expandSideBar();
         
         bookForm.classList.add('out');
         bookForm.classList.remove('in');
@@ -102,12 +171,12 @@ updateBtn.addEventListener('click', function () {
     selectedBookObj.pages = bookPagesInput.value;
     selectedBookObj.read = bookReadInput.checked;
 
-    var bookTitleCont = addBookTitleCont(selectedBookObj);
-    var bookAuthorCont = addBookAuthorCont(selectedBookObj);
+    var bookTitleCont = DOMModule.addBookTitleCont(selectedBookObj);
+    var bookAuthorCont = DOMModule.addBookAuthorCont(selectedBookObj);
     selectedBookCont.childNodes[0].appendChild(bookTitleCont);
     selectedBookCont.childNodes[0].appendChild(bookAuthorCont);
 
-    refactorLibrary();
+    DOMModule.refactorLibrary();
 
     libraryArr[selectedBookObjID] = selectedBookObj;
     localStorage.setItem('libraryArr', JSON.stringify(libraryArr))
@@ -115,15 +184,14 @@ updateBtn.addEventListener('click', function () {
     selectedBookCont.childNodes[0].childNodes[0].innerHTML = selectedBookObj.title;
     selectedBookCont.childNodes[0].childNodes[1].innerHTML = selectedBookObj.author;
 
-    foldSideBar();
-    kicked = true;
+    DOMModule.foldSideBar();
 })  
 
 newBookBtn.addEventListener('click', function () {
-    clearInputFields();
+    DOMModule.clearInputFields();
     updateBtn.style.display = 'none';
     submitBtn.style.display = 'block';
-    expandSideBar();
+    DOMModule.expandSideBar();
     bookForm.classList.add('out');
     bookForm.classList.remove('in');
 })
@@ -147,12 +215,12 @@ submitBtn.addEventListener('click', function () {
 
     const newBook = new Book(bookTitle, bookAuthor, bookPages, bookRead, false);
     libraryArr = fetchLocalLib();
-    let i = libraryArr.length;
+    var i = libraryArr.length;
     libraryArr.push(newBook);
     localStorage.setItem('libraryArr', JSON.stringify(libraryArr))
     makeNewBookContainer(newBook, i);
 
-    foldSideBar();
+    DOMModule.foldSideBar();
 
     let bookInputs = document.querySelectorAll('.book-input');
     bookInputs.forEach((input) => {
@@ -160,15 +228,14 @@ submitBtn.addEventListener('click', function () {
     })
 });
 
-if (libraryArr !== null) {
-    loadLibFromStorage (libraryArr)
-} else {
+if (libraryArr === null) {
     libraryArr = [];
     var exampleBook = new Book('The Art of War', 'Sun Tsu', 68, true)
     libraryArr.push(exampleBook)
-    localStorage.setItem('libraryArr', JSON.stringify(libraryArr))
-    loadLibFromStorage (libraryArr)
+    localStorage.setItem('libraryArr', JSON.stringify(libraryArr))   
 }
+
+loadLibFromStorage (libraryArr)
 
 function loadLibFromStorage (libraryArr) {
     for (let i = 0; i < libraryArr.length; i++) {
@@ -185,78 +252,8 @@ function Book(title, author, pages, read, state) {
     this.coverURL;
 }
 
-function addBookAttCont () {
-    var newBookDiv = document.createElement('div');
-    newBookDiv.className = "book-attribute-container";
-    return newBookDiv;
-}
-
-function addBookTitleCont (book) {
-    var bookTitle = document.createElement('p');
-    bookTitle.className = 'title';
-    bookTitle.innerHTML = book.title;
-    return bookTitle;
-}
-
-function addBookAuthorCont (book) {
-    var bookAuthor = document.createElement('p');
-    bookAuthor.className = 'author';
-    bookAuthor.innerHTML = book.author;
-    return bookAuthor;
-}
-
-function addDeleteBtn () {
-    var deleteBtn = document.createElement('button');
-    deleteBtn.className = "delete-btn";
-    deleteBtn.innerHTML = "x";
-    return deleteBtn;
-}
-
-function expandSideBar() {
-    const bookCards = document.querySelectorAll('.book-container');
-    libraryContainer.classList.add('shrink');
-    libraryContainer.classList.remove('grow');
-    
-    bookCards.forEach((card) => {
-        card.classList.add('shrink')
-        card.classList.remove('grow');
-    })
-    sideBar.classList.add('out');
-    sideBar.classList.remove('in');
-
-}
-
 function fetchLocalLib () {
     var library = localStorage.getItem('libraryArr');
     var libraryArrParsed = JSON.parse(library);
     return libraryArrParsed;
 }
-
-
-function clearInputFields () {
-    bookTitleInput.value = ''
-    bookAuthorInput.value = ''
-    bookPagesInput.value = ''
-    bookReadInput.checked = ''
-}
-
-function refactorLibrary () {
-    libraryArr = fetchLocalLib();
-    const allBookContainers = document.querySelectorAll('.book-container')
-    allBookContainers.forEach(function (book, index) {
-        book.dataset.id = (libraryArr.length - 1) - index;
-    })
-}
-
-function foldSideBar() {
-    const bookCards = document.querySelectorAll('.book-container');
-    libraryContainer.classList.remove('shrink');
-    libraryContainer.classList.add('grow');
-    bookCards.forEach((card) => {
-        card.classList.remove('shrink');
-        card.classList.add('grow');
-        })
-    bookForm.classList.add('in');
-    sideBar.classList.add('in');
-}
-
