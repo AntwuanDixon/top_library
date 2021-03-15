@@ -110,33 +110,6 @@ button {
     width: 100%;
 }
 
-.side-panel {
-    position: fixed;
-    right: 0px;
-    bottom: 0px;
-    width: 0px;
-    height: 84.3vh;
-    border-style: none;
-    background-color: black;
-    padding-top: 30px;
-    border-style: none;
-    border-width: 0px;
-}
-
-.side-panel.out {
-    transition: 1.5s;
-    width: 300px;
-    border-style: solid;
-    border-width: 2px;
-    border-left-color: azure;
-
-}
-
-.side-panel.in {
-    transition: 1.5s;
-    width: 0px;
-    border-style: none;
-}
 
 .book-container {
     position: relative;
@@ -176,25 +149,29 @@ button {
 }
 
 .book-form {
-    opacity: 0;
     text-align: center;
     position: fixed;
     right: 0px;
     bottom: 0px;
     width: 0px;
-    height: 83vh;
+    height: 84.3vh;
+    background-color: black;
+    border-style: none;
+    padding-top: 30px;
+    border-width: 0px;
 }
 
 .book-form.out {
     transition: 1.5s;
-    width: 297px;
-    opacity: 1;
+    width: 300px;
+    border-style: solid;
+    border-width: 2px;
+    border-left-color: azure;
 }
 
 .book-form.in {
     transition: 1.5s;
     width: 0px;
-    opacity: 0;
     border-style: none;
 }
 
@@ -235,6 +212,8 @@ button {
 }
 
 .new-book-btn {
+    height: 80px;
+    width: 80px;
     margin: 0px 60px 0px 0px;
     background-color: rgb(0, 0, 0);
     font-size: 3em;
@@ -267,14 +246,13 @@ button {
 }
 
 #nuke-btn-container {
-    position: absolute;
-    bottom: 200px;
-    left: 0px;
+    margin-top: 10vh;
 }
 
-@media (max-width: 767px) {
+@media (max-width: 750px) {
     html {
         font-size: .8em;
+        max-height: 100vh;
     }
     .title-container {
         font-size: .6em;
@@ -283,8 +261,15 @@ button {
         padding-right: 0px;
     }
     nav {
-        max-height: 100px;
+        max-height: 20vh;
         vertical-align: middle;
+    }
+    main {
+        max-height: 80vh;
+    }
+    ul {
+        margin-top: auto;
+        margin-bottom: auto;
     }
     .new-book-btn {
         width: 60px;
@@ -294,7 +279,7 @@ button {
         margin-top: 5px;
     }
     .side-panel {
-        max-height: calc(100vh - 138px);
+        max-height: 80vh;
     }
     .side-panel.out {
         width: 100vw;
@@ -306,18 +291,9 @@ button {
         width: 0px;
     }
     .book-form.out {
-        width: 95vw;
+        width: 100vw;
     }
     .book-form.in {
         width: 0;
     }
-}
-
-@media only screen and (min-width: 768px) {
-    /* For desktop: */
-    .new-book-btn {
-        width: 80px;
-        height: 80px;
-    }
-
 }
