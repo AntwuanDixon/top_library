@@ -13,17 +13,41 @@ body {
     background-color: black;
 }
 
-@media (max-width: 850px) {
+@media (max-width: 750px) {
     html {
         font-size: .8em;
     }
     .title-container {
-        max-width: min-content;
+        max-width: 40%;
         padding: 0px;
+        font-size: .5em;
+    }
+    .library-title {
+        padding-right: 0px;
+    }
+    nav {
+        max-height: 100px;
+    }
+    .new-book-btn {
+        width: 50px;
+        padding-bottom: 50%;
+    }
+    .book-form.out {
+        width:100vw;
+    }
+    .side-panel.out {
+        width: 100vw;
     }
 }
 
+@media only screen and (min-width: 768px) {
+    /* For desktop: */
+    .new-book-btn {
+        width: 80px;
+        height: 80px;
+    }
 
+}
 nav {
     height: 120px;
     z-index: 200;
@@ -240,9 +264,6 @@ button {
 
 .new-book-btn {
     margin: 0px 60px 0px 0px;
-    padding: 0px;
-    height: 80px;
-    width: 80px;
     background-color: rgb(0, 0, 0);
     font-size: 3em;
     color: rgb(255, 255, 255);
@@ -250,6 +271,9 @@ button {
     border-color: azure;
     border-width: 2px;
     border-style: solid;
+    text-align: center;
+    vertical-align: middle;
+
 }
 
 
