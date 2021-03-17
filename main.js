@@ -106,10 +106,8 @@ const makeNewBookContainer = function (book, index) {
     bookContainer.appendChild(deleteBtn);
 
     if (book.coverURL !== undefined) {
-        console.log('has cover')
         createBookCover(bookContainer, book)
     } else {
-        console.log('no has cover')
         var bookWithCover = fetchSearchResults (book, bookContainer, index)
         bookWithCover.then(function (result) {
         libraryArr.splice(index, 1, result);
@@ -286,7 +284,6 @@ function fetchLocalLib () {
 // fetch book cover from open library API
 
 function fetchSearchResults (book, bookContainer, index) {
-    console.log(book)
     fetch("https://openlibrary.org/search.json?q="+book.title)
         .then(resolve => resolve.json())
         .then(response => {
@@ -310,8 +307,6 @@ function fetchSearchResults (book, bookContainer, index) {
                 libraryArr[index] = book;
                 createBookCover(bookContainer, book)
                 localStorage.setItem('libraryArr', JSON.stringify(libraryArr))
-            } else {
-                console.log('no book cover URLs')
             }
             return book
         })
@@ -336,7 +331,6 @@ function createBookCover (bookContainer, book) {
 }
 
 function createCoverURL(booksWithCovers) {
-    console.log(booksWithCovers[0])
     if (booksWithCovers[0] != undefined) {
         var booksWithCoverURLs = booksWithCovers.map(function (book) {
             var coverID = book.cover_i
@@ -363,7 +357,6 @@ function checkBookTitle (response, book) {
     if (matchingTitles) {
         return checkAuthorName(matchingTitles, book.author)
     } else {
-        console.log('no matching titles')
         return false;
     }
 }
