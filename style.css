@@ -5,6 +5,7 @@
 * {
     font-family: 'Open Sans', sans-serif;
     font-size: 1em;
+    box-sizing: border-box;
 }
 
 body {
@@ -15,7 +16,7 @@ body {
 
 
 nav {
-    height: 120px;
+    height: 12vh;
     z-index: 200;
     background-color: rgb(0, 0, 0);
     border-style: solid;
@@ -34,7 +35,7 @@ li {
 
 main {
     background-color: rgb(41, 41, 41);
-    max-height: 87vh;
+    max-height: 88vh;
     width: 100%;
     overflow-x: hidden;
 }
@@ -114,7 +115,7 @@ button {
 .book-container {
     position: relative;
     float: left;
-    margin: 20px 30px;
+    margin: 30px 30px;
     padding: 10px 5px 10px 5px;
     min-width: 260px;
     height: 360px;
@@ -154,10 +155,9 @@ button {
     right: 0px;
     bottom: 0px;
     width: 0px;
-    height: 84.3vh;
+    height: 88vh;
     background-color: black;
     border-style: none;
-    padding-top: 30px;
     border-width: 0px;
 }
 
@@ -197,6 +197,10 @@ button {
     border-width: .2em;
     border-radius: 15px;
     border-color: azure;
+}
+
+.book-attribute-container.no-border {
+    border-style: none;
 }
 
 .book-input-container {
@@ -241,6 +245,22 @@ button {
     padding-bottom: 5px;
 }
 
+.book-cover-container {
+    display: inline-block;
+    position: absolute;
+    bottom: -5px;
+    right: -15px;
+    width: 113%;
+    margin-top: 0px;
+    z-index: 100;
+}
+
+.book-cover {
+    max-width: 90%;
+    border-radius: 5px;
+    -webkit-box-reflect: below 0px -webkit-gradient(linear, left top, left bottom, from(transparent), color-stop(90%, transparent) , to(rgba(255, 255, 255, 0.26)));
+}
+
 .nuke-library-btn {
     width: 200px;
 }
@@ -248,6 +268,7 @@ button {
 #nuke-btn-container {
     margin-top: 10vh;
 }
+
 
 @media (max-width: 750px) {
     html {
@@ -261,11 +282,11 @@ button {
         padding-right: 0px;
     }
     nav {
-        max-height: 20vh;
+        height: 15vh;
         vertical-align: middle;
     }
     main {
-        max-height: 80vh;
+        max-height: 85vh;
     }
     ul {
         margin-top: auto;
@@ -278,9 +299,6 @@ button {
         padding-top: -5px;
         margin-top: 5px;
     }
-    .side-panel {
-        max-height: 80vh;
-    }
     .side-panel.out {
         width: 100vw;
     }
@@ -289,6 +307,9 @@ button {
     }
     .library-container.shrink {
         width: 0px;
+    }
+    .book-form {
+        height: 85vh;
     }
     .book-form.out {
         width: 100vw;
