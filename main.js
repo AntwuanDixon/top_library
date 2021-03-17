@@ -254,7 +254,7 @@ submitBtn.addEventListener('click', function () {
 // make example book upon beginning new session
 if (libraryArr === null) {
     libraryArr = [];
-    var exampleBookCover = 'http://covers.openlibrary.org/b/id/9008770-L.jpg'
+    var exampleBookCover = 'https://covers.openlibrary.org/b/id/9008770-L.jpg'
     var exampleBook = new Book('The Art of War', 'Sun Tsu', 68, true, exampleBookCover)
     libraryArr.push(exampleBook)
     localStorage.setItem('libraryArr', JSON.stringify(libraryArr))   
@@ -287,7 +287,7 @@ function fetchLocalLib () {
 
 function fetchSearchResults (book, bookContainer, index) {
     console.log(book)
-    fetch("http://openlibrary.org/search.json?q="+book.title)
+    fetch("https://openlibrary.org/search.json?q="+book.title)
         .then(resolve => resolve.json())
         .then(response => {
 
@@ -340,7 +340,7 @@ function createCoverURL(booksWithCovers) {
     if (booksWithCovers[0] != undefined) {
         var booksWithCoverURLs = booksWithCovers.map(function (book) {
             var coverID = book.cover_i
-            var coverURL = "http://covers.openlibrary.org/b/id/" + coverID + "-L.jpg";
+            var coverURL = "https://covers.openlibrary.org/b/id/" + coverID + "-L.jpg";
             book.coverURL = coverURL;
             return book;
         })
@@ -366,7 +366,6 @@ function checkBookTitle (response, book) {
         console.log('no matching titles')
         return false;
     }
-    
 }
 
 function checkAuthorName (bookArr, author) {
