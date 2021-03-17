@@ -1,4 +1,4 @@
-#The Odin Project Library App
+# The Odin Project Library App
 
 From [The Odin Project](https://www.theodinproject.com/) curriculum.
 
@@ -8,12 +8,12 @@ Book covers are retrieved from [Open Library's API](https://openlibrary.org/deve
 
 ![Sample Library Image](/Users/Evan/Desktop/Screen Shot 2021-03-17 at 12.13.50 PM.png)
 
-###Guide
+### Guide
 [Live App](https://antwuandixon.github.io/top_library/)
 
 For best results retrieving book covers, enter the book title and author exactly as they appear.
 
-###License
+### License
 This project is licensed under the MIT License.
 
 MIT License
