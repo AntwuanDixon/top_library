@@ -15,5 +15,3 @@ For best results retrieving book covers, enter the book title and author exactly
 
 ### License
 This project is licensed under the MIT License.
-
-MIT License
