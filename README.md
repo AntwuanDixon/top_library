@@ -6,7 +6,7 @@ Created with vanilla JS, CSS, and HTML. Books are locally stored.
 
 Book covers are retrieved from [Open Library's API](https://openlibrary.org/developers/api).
 
-![Sample Library Image](sample_library.png)
+![Sample Library Image](https://i.imgur.com/71awCzL.png)
 
 ### Guide
 [Live App](https://antwuandixon.github.io/top_library/)
