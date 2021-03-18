@@ -16,31 +16,18 @@ var libraryArr = fetchLocalLib();
 
 var DOMModule = (function () {
     return {
-        addBookAttCont: function () {
-            var newBookDiv = document.createElement('div');
-            newBookDiv.className = "book-attribute-container";
-            return newBookDiv;
+        writeToDOM: function(selector, text) {
+            if(!!document && 'querySelector' in document) {
+                document.querySelector(selector).innerHTML = text;
+            } else {
+                console.log('nah')
+            }
         },
-        
-        addBookTitleCont: function (book) {
-            var bookTitle = document.createElement('p');
-            bookTitle.className = 'title';
-            bookTitle.innerHTML = book.title;
-            return bookTitle;
-        },
-        
-        addBookAuthorCont: function (book) {
-            var bookAuthor = document.createElement('p');
-            bookAuthor.className = 'author';
-            bookAuthor.innerHTML = book.author;
-            return bookAuthor;
-        },
-        
-        addDeleteBtn: function () {
-            var deleteBtn = document.createElement('button');
-            deleteBtn.className = "delete-btn";
-            deleteBtn.innerHTML = "x";
-            return deleteBtn;
+        addElement: function (elementType, className, appendTo) {
+            var newElement = document.createElement(elementType);
+            newElement.className = className;
+            appendTo.appendChild(newElement);
+            return newElement;
         },
         
         expandSideBar: function() {
@@ -95,15 +82,15 @@ const makeNewBookContainer = function (book, index) {
     libraryContainer.prepend(bookContainer);
 
     //Add containers, title, author, delete btn to card
-    var bookCard = DOMModule.addBookAttCont();
-    var bookTitle = DOMModule.addBookTitleCont(book);
-    var bookAuthor = DOMModule.addBookAuthorCont(book);
-    var deleteBtn = DOMModule.addDeleteBtn();
-    
-    bookContainer.appendChild(bookCard);
-    bookCard.appendChild(bookTitle);
-    bookCard.appendChild(bookAuthor);
-    bookContainer.appendChild(deleteBtn);
+
+    var bookCard = DOMModule.addElement('div', "book-attribute-container", bookContainer)
+    var bookTitle = DOMModule.addElement('p', 'title', bookCard)
+    DOMModule.writeToDOM(`.${bookTitle.className}`, book.title)
+    var bookAuthor = DOMModule.addElement('p', 'author', bookCard)
+    DOMModule.writeToDOM(`.${bookAuthor.className}`, book.author)
+    var deleteBtn = DOMModule.addElement('button', "delete-btn", bookContainer)
+    DOMModule.writeToDOM(`.${deleteBtn.className}`, 'x')
+
 
     if (book.coverURL !== undefined) {
         createBookCover(bookContainer, book)
@@ -188,12 +175,10 @@ updateBtn.addEventListener('click', function () {
     selectedBookObj.pages = bookPagesInput.value;
     selectedBookObj.read = bookReadInput.checked;
     // create new book attributes on selected book card
-    var bookTitleCont = DOMModule.addBookTitleCont(selectedBookObj);
-    var bookAuthorCont = DOMModule.addBookAuthorCont(selectedBookObj);
-    selectedBookCont.childNodes[0].appendChild(bookTitleCont);
-    selectedBookCont.childNodes[0].appendChild(bookAuthorCont);
-    selectedBookCont.childNodes[0].childNodes[0].innerHTML = selectedBookObj.title;
-    selectedBookCont.childNodes[0].childNodes[1].innerHTML = selectedBookObj.author;
+    var bookTitle = DOMModule.addElement('p', 'title', selectedBookCont.childNodes[0])
+    DOMModule.writeToDOM(`.${bookTitle.className}`, selectedBookObj.title)
+    var bookAuthor = DOMModule.addElement('p', 'author', selectedBookCont.childNodes[0])
+    DOMModule.writeToDOM(`.${bookAuthor.className}`, selectedBookObj.author)
 
     var bookWithCover = fetchSearchResults (selectedBookObj, selectedBookCont, selectedBookObjID)
     bookWithCover.then(function (result) {
